@@ -1,0 +1,20 @@
+sign in / log in (we need to handle the user name and password) "Authentication"
+
+for each user there is a role (special interface and permissions user/admin) "Authorization"
+
+
+User:
+    Home Page: exploring books and also searching for books by name
+            in each row there is a book and a button to add it to the cart.
+
+    Cart Page: list of added books with option to delete them from the cart or check out and
+            go to payments and then finalize the order (get invoice).
+
+
+Admin:
+
+    Orders Page: list of all orders and the ability to show all details (user info)
+
+
+    Operation Page: the operation in the system such as (creating order, adding books, deleting books
+            editing on order...etc)
