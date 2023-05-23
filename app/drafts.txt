@@ -1,20 +1,43 @@
-sign in / log in (we need to handle the user name and password) "Authentication"
+= Intro =
+    - Authentication: sign up / log in pages (we need to handle email and password)
+    - Authorization: for each user there is a role (special interface and permissions user/admin)
 
-for each user there is a role (special interface and permissions user/admin) "Authorization"
+= Routes =
+    User:
+        Home Page: exploring books and also searching for books by name
+                in each row there is a book and a button to add it to the cart.
+
+        Cart Page: list of added books with option to delete them from the cart or check out and
+                go to payments and then finalize the order (get invoice).
+
+    Admin:
+
+        Orders Page: list of all orders and the ability to show all details (user info)
+
+        Operation option embedded into pages: the operation in the system such as (creating order,
+                adding books, deleting books, editing on order...etc)
+
+= DataBase =
+    USER : {
+        name,
+        email,
+        password,
+        phone number,
+        gender,
+        role: [ customer, admin ]
+    },
+    BOOK : {
+        name,
+        author,
+        price,
+        qty,
+        isbn
+    },
+    ORDER : {
+        number,
+        books (list of ids object),
+        total,
+        status
+    }
 
 
-User:
-    Home Page: exploring books and also searching for books by name
-            in each row there is a book and a button to add it to the cart.
-
-    Cart Page: list of added books with option to delete them from the cart or check out and
-            go to payments and then finalize the order (get invoice).
-
-
-Admin:
-
-    Orders Page: list of all orders and the ability to show all details (user info)
-
-
-    Operation Page: the operation in the system such as (creating order, adding books, deleting books
-            editing on order...etc)
