@@ -3,41 +3,69 @@
     - Authorization: for each user there is a role (special interface and permissions user/admin)
 
 = Routes =
-    User:
-        Home Page: exploring books and also searching for books by name
-                in each row there is a book and a button to add it to the cart.
+    General:
+        (1) Sign up: create new account (check if the email has already linked account)
+        (2) Log in: log with existing account (accept if the password is correct)
 
-        Cart Page: list of added books with option to delete them from the cart or check out and
+    User:
+        (3) Home Page: exploring books and also searching for books by name
+                in each row there is a book title and img and its price.
+
+        (4) Book View: show all the book details with the option of add to cart
+
+
+        (5) Cart Page: list of added books with option to delete them from the cart or check out and
                 go to payments and then finalize the order (get invoice).
 
+            My_Account:  all user details
+
+
     Admin:
+        (6) Orders Page: list of all orders and the ability to show all details (user info)
 
-        Orders Page: list of all orders and the ability to show all details (user info)
+        (7) Add Book: create new book with all its fields
 
-        Operation option embedded into pages: the operation in the system such as (creating order,
+         Operation option embedded into pages: the operation in the system such as (creating order,
                 adding books, deleting books, editing on order...etc)
 
 = DataBase =
     USER : {
+        id,
         name,
         email,
         password,
         phone number,
         gender,
-        role: [ customer, admin ]
+        role: [ customer, admin ] *derived*
     },
     BOOK : {
-        name,
+        id,
+        name(title),
         author,
         price,
+        genre,
         qty,
-        isbn
+        isbn,
+        desc,
+        img
     },
     ORDER : {
-        number,
-        books (list of ids object),
-        total,
-        status
+        id,
+        user, (user id),
+        books (list of books ids ),
+        total, *derived*
+        payment_method: ["cash","credit card","installment"],
+        status:["approved","pending","declined"], (controlled by the admin)
     }
 
+= Color Plates =
+1- #222831 dark
+2- #393E46 half dark
+3- #00ADB5 sky blue
+4- #EEEEEE almost white
 
+
+= Task for each one =
+Hani: sing up / log in
+Abdulkader: activity 3,4
+Abdulsalam: dbs schema + activity 6
