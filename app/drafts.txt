@@ -11,7 +11,7 @@
         (3) Home Page: exploring books and also searching for books by name
                 in each row there is a book title and img and its price.
 
-        (4) Book View: show all the book details with the option of add to cart
+            (4) Book View: show all the book details with the option of add to cart
 
 
         (5) Cart Page: list of added books with option to delete them from the cart or check out and
@@ -19,6 +19,7 @@
 
             My_Account:  all user details
 
+            My_Orders: list all orders for this user
 
     Admin:
         (6) Orders Page: list of all orders and the ability to show all details (user info)
