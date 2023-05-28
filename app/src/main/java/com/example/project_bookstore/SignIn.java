@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,11 +18,12 @@ public class SignIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
-        TextView email = (TextView) findViewById(R.id.email);
-        TextView password = (TextView) findViewById(R.id.password);
-        TextView isReg = (TextView)findViewById(R.id.isReg);
-        MaterialButton loginButton = (MaterialButton) findViewById(R.id.loginbutton);
 
+
+        //Login Button
+        EditText email = (EditText) findViewById(R.id.email);
+        EditText password = (EditText) findViewById(R.id.password);
+        MaterialButton loginButton = (MaterialButton) findViewById(R.id.loginbutton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -29,13 +31,15 @@ public class SignIn extends AppCompatActivity {
                     Toast.makeText(SignIn.this,"LOGIN SUCCESSFUL",Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(SignIn.this,"LOGIN FAILED!",Toast.LENGTH_SHORT).show();
-
                 }
-
-
             }
         });
-        isReg.setOnClickListener(new View.OnClickListener() {
+
+
+
+        //isNotReg TextView
+        TextView isNotReg = (TextView)findViewById(R.id.isNotReg);
+        isNotReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(SignIn.this, Register.class);
