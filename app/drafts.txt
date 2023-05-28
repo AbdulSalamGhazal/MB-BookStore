@@ -9,9 +9,9 @@
 
     User:
         (3) Home Page: exploring books and also searching for books by name
-                in each row there is a book title and img and its price.
+                in each row there is a bookModel title and img and its price.
 
-            (4) Book View: show all the book details with the option of add to cart
+            (4) Book View: show all the bookModel details with the option of add to cart
 
 
         (5) Cart Page: list of added books with option to delete them from the cart or check out and
@@ -24,7 +24,7 @@
     Admin:
         (6) Orders Page: list of all orders and the ability to show all details (user info)
 
-        (7) Add Book: create new book with all its fields
+        (7) Add Book: create new bookModel with all its fields
 
          Operation option embedded into pages: the operation in the system such as (creating order,
                 adding books, deleting books, editing on order...etc)
