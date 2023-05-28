@@ -10,13 +10,28 @@ import android.widget.Button;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    Button b1 ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        b1 = (Button) findViewById(R.id.button);
-        b1.setOnClickListener(new View.OnClickListener() {
+
+
+
+        //Signup button
+        Button signup = (Button) findViewById(R.id.signup);
+        signup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,Register.class);
+                startActivity(i);
+            }
+        });
+
+
+        //Signin button
+        Button signin = (Button) findViewById(R.id.signin);
+        signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this,SignIn.class);
