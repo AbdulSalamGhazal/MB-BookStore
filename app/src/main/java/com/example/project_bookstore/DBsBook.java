@@ -88,6 +88,4 @@ public class DBsBook extends SQLiteOpenHelper {
         return sqLiteDatabase.delete(TABLE_NAME, COLUMN_ID+"=?",
                 new String[]{String.valueOf(id)}) > 0;
     }
-
-
 }

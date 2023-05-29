@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        //Signup button
+        // Sign up button
         Button signup = (Button) findViewById(R.id.signup);
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        //Signin button
+        // Sign in button
         Button signin = (Button) findViewById(R.id.signin);
         signin.setOnClickListener(new View.OnClickListener() {
             @Override

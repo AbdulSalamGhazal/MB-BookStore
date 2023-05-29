@@ -30,6 +30,8 @@ public class SignIn extends AppCompatActivity {
                 String Email = email.getText().toString();
                 String Password = password.getText().toString();
 
+                // search for matching email, if none found toast "Email/Password incorrect"
+                // if found fetch password and compare it, if not match "Email/Password incorrect"
                 if(Email.equals("admin") && Password.equals("admin")){
                     Toast.makeText(SignIn.this,"LOGIN SUCCESSFULLY",Toast.LENGTH_SHORT).show();
                 }else{

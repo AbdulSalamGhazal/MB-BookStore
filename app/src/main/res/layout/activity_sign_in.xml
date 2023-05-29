@@ -58,13 +58,6 @@
         android:id="@+id/loginbutton"
         android:layout_below="@id/password"
         android:layout_centerHorizontal="true"
-<<<<<<< HEAD
-        android:layout_margin="20dp"
-        />
-
-    <TextView
-        android:id="@+id/isReg"
-=======
         android:layout_marginStart="20dp"
         android:layout_width="150dp"
         android:textSize="20dp"
@@ -77,23 +70,13 @@
 
     <TextView
         android:id="@+id/isNotReg"
->>>>>>> refs/remotes/origin/main
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/loginbutton"
         android:layout_centerHorizontal="true"
-<<<<<<< HEAD
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginBottom="20dp"
-        android:text="Already Have Account?"
-        android:textColor="@color/white" />
-=======
         android:background="#30ffffff"
         android:text="I Don't Have An Account!"
         android:textColor="@color/white"
         android:textSize="20dp"
         android:textStyle="bold" />
->>>>>>> refs/remotes/origin/main
 </RelativeLayout>

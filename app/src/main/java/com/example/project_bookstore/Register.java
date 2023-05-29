@@ -44,7 +44,8 @@ public class Register extends AppCompatActivity {
                 String Phone = phone.getText().toString();
                 String Gender = gender.getText().toString();
 
-                if(userName.equals("") || Email.equals("") || Password.equals("") || Phone.equals("") || Gender.equals("") ){
+                if(userName.equals("") || Email.equals("") || Password.equals("") || Phone.equals("")
+                        || ( Gender.equals("male") && Gender.equals("female"))){
                     Toast.makeText(Register.this,"PLEASE COMPLETE ALL FIELDS!",Toast.LENGTH_LONG).show();
                 }
                 else{
@@ -53,7 +54,6 @@ public class Register extends AppCompatActivity {
                 }
             }
         });
-
 
 
 

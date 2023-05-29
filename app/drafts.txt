@@ -38,6 +38,7 @@
         phone number,
         gender,
         role: [ customer, admin ] *derived*
+        books: []
     },
     BOOK : {
         id,
