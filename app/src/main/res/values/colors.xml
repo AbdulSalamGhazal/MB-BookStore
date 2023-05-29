@@ -10,4 +10,6 @@
     <color name="dark">#222831</color>
     <color name="half_dark">#393E46</color>
     <color name="sky_blue">#00ADB5</color>
+    <color name="gray">#808080</color>
+    <color name="green">#00FF00</color>
 </resources>

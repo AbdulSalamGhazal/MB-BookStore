@@ -16,7 +16,7 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
     private Listener listener;
 
     interface Listener {
-        void onClick(int position);
+        void onClick(int _id);
     }
 
     public void setListener(Listener listener) {
@@ -37,8 +37,7 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
 
     @Override
     public int getItemCount() {
-        //TODO: must be bookCursor cursor.getCount
-        return 3;
+        return cursor.getCount();
     }
 
     @NonNull
@@ -52,11 +51,12 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CardView cardView = holder.cardView;
+        cursor.moveToPosition(position);
 
         //TODO: following values must be fetched from cursor
         int imageId = R.drawable.head_first_image;
-        String title = "Head First Android Development";
-        String author = "Dawn Griffiths\nDavid Griffiths";
+        String title = cursor.getString(1);
+        String author = cursor.getString(2);
 
         //set the image of the book
         ImageView bookImageView = cardView.findViewById(R.id.book_image);
@@ -74,7 +74,7 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
         //set onclick listener to the card
         cardView.setOnClickListener(view -> {
             if (listener != null) {
-                listener.onClick(position);
+                listener.onClick(cursor.getInt(0));
             }
         });
     }
