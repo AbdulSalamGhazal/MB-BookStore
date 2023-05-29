@@ -41,7 +41,6 @@ public class SignIn extends AppCompatActivity {
         });
 
 
-
         //isNotReg TextView
         TextView isNotReg = (TextView)findViewById(R.id.isNotReg);
         isNotReg.setOnClickListener(new View.OnClickListener() {
