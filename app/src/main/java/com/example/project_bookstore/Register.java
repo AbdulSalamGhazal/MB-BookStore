@@ -38,11 +38,18 @@ public class Register extends AppCompatActivity {
         regButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(name!=null && email!=null && password!=null && phone!=null && gender!=null){
-                    Toast.makeText(Register.this,"REGISTER SUCCESSFULLY!",Toast.LENGTH_LONG).show();
+                String userName = name.getText().toString();
+                String Email = email.getText().toString();
+                String Password = password.getText().toString();
+                String Phone = phone.getText().toString();
+                String Gender = gender.getText().toString();
+
+                if(userName.equals("") || Email.equals("") || Password.equals("") || Phone.equals("") || Gender.equals("") ){
+                    Toast.makeText(Register.this,"PLEASE COMPLETE ALL FIELDS!",Toast.LENGTH_LONG).show();
                 }
                 else{
-                    Toast.makeText(Register.this,"PLEASE COMPLETE AN EMPTY SPACES!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(Register.this,"SUCCESSFULLY!",Toast.LENGTH_LONG).show();
+
                 }
             }
         });
