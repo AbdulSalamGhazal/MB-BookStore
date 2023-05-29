@@ -27,8 +27,11 @@ public class SignIn extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(email.getText().toString().equals("admin") && password.getText().toString().equals("admin")){
-                    Toast.makeText(SignIn.this,"LOGIN SUCCESSFUL",Toast.LENGTH_SHORT).show();
+                String Email = email.getText().toString();
+                String Password = password.getText().toString();
+
+                if(Email.equals("admin") && Password.equals("admin")){
+                    Toast.makeText(SignIn.this,"LOGIN SUCCESSFULLY",Toast.LENGTH_SHORT).show();
                 }else{
                     Toast.makeText(SignIn.this,"LOGIN FAILED!",Toast.LENGTH_SHORT).show();
                 }
