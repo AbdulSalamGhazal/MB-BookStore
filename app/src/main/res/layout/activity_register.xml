@@ -8,16 +8,18 @@
     tools:context=".Register">
 
     <TextView
-        android:id="@+id/Register"
+        android:id="@+id/RegisterText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="50dp"
         android:gravity="center"
-        android:text="Register"
+        android:text="SIGN UP"
         android:textColor="@color/white"
         android:textSize="35dp"
-        android:layout_margin="50dp"
-        android:textStyle="bold"
-        />
+        android:textStyle="bold" />
 
     <EditText
         android:id="@+id/name"
@@ -26,7 +28,7 @@
         android:background="#30ffffff"
         android:drawableLeft="@drawable/baseline_person_outline_24"
         android:drawablePadding="20dp"
-        android:layout_below="@id/Register"
+        android:layout_below="@id/RegisterText"
         android:hint="Name"
         android:padding="15dp"
         android:inputType="textPersonName"
@@ -65,7 +67,7 @@
         android:hint="Password"
         android:layout_marginTop="10dp"
         android:padding="15dp"
-        android:inputType="textEmailAddress"
+        android:inputType="textPassword"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:layout_marginLeft="20dp"
@@ -90,21 +92,55 @@
         android:layout_marginRight="20dp"
         />
 
-    <EditText
+    <Button
         android:id="@+id/Gender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/PhoneNumber"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        android:allowUndo="false"
         android:background="#30ffffff"
         android:drawableLeft="@drawable/baseline_person_search_24"
-        android:drawablePadding="20dp"
-        android:layout_below="@id/PhoneNumber"
-        android:hint="Gender"
-        android:layout_marginTop="10dp"
+        android:drawablePadding="90dp"
+        android:includeFontPadding="false"
         android:padding="15dp"
+        android:text="Gender"
+        android:textAlignment="textStart"
         android:textColor="@color/white"
-        android:textColorHint="@color/white"
+        android:textSize="18dp"
+        android:visibility="visible"
+        app:iconPadding="17dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/RegisterButton"
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:layout_below="@id/Gender"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
+        android:textSize="20dp"
+        android:backgroundTint="@color/design_default_color_secondary"
+        android:text="REGISTER" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/isReg"
+        android:layout_below="@id/RegisterButton"
+        android:text="Already Have An Account?"
+        android:textColor="@color/white"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:background="#30ffffff"
         />
+
 
 </RelativeLayout>
