@@ -12,6 +12,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.button.MaterialButton;
 
@@ -37,7 +38,12 @@ public class Register extends AppCompatActivity {
         regButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(name!=null && email!=null && password!=null && phone!=null && gender!=null){
+                    Toast.makeText(Register.this,"REGISTER SUCCESSFULLY!",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    Toast.makeText(Register.this,"PLEASE COMPLETE AN EMPTY SPACES!",Toast.LENGTH_LONG).show();
+                }
             }
         });
 
