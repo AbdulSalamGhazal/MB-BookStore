@@ -12,8 +12,9 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
 
-public class ShowBooks extends AppCompatActivity {
+public class ShowBooksActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,12 @@ public class ShowBooks extends AppCompatActivity {
             intent.putExtra(BookDetailActivity.EXTRA_BOOK_ID, book_id);
             startActivity(intent);
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_mian, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     private Cursor getCursor() {

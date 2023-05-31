@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -28,20 +29,22 @@ public class BookDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_detail);
 
-        // Find the views by their ids
         toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        // Find the views by their ids
         bookImageView = findViewById(R.id.book_image);
         bookTitleView = findViewById(R.id.book_title);
         bookAuthorView = findViewById(R.id.book_author);
         bookDescriptionView = findViewById(R.id.book_description);
         bookPriceView = findViewById(R.id.book_price);
-        quantityInput = findViewById(R.id.quantity_input);
         addToCartButton = findViewById(R.id.add_to_cart_button);
 
         Cursor cursor = getCursor();
         cursor.moveToFirst();
         // Set the toolbar as the action bar
-        setSupportActionBar(toolbar);
 
         // Set the toolbar title to 'Book Details'
         getSupportActionBar().setTitle("Book Details");
