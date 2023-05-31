@@ -37,21 +37,21 @@ public class ShowBooks extends AppCompatActivity {
     }
 
     private Cursor getCursor() {
-        SQLiteDatabase db = new DBsBook(this).getReadableDatabase();
-        Cursor cursor = db.query(DBsBook.TABLE_NAME,
-                new String[] {DBsBook.COLUMN_ID, DBsBook.COLUMN_NAME, DBsBook.COLUMN_AUTHOR},
+        SQLiteDatabase db = new DBs(this).getReadableDatabase();
+        Cursor cursor = db.query(DBs.BOOK_TABLE_NAME,
+                new String[] {DBs.BOOK_COLUMN_ID, DBs.BOOK_COLUMN_NAME, DBs.BOOK_COLUMN_AUTHOR},
                 null, null, null, null, null);
         return cursor;
     }
     private void addBooks(SQLiteDatabase db) {
         for (int i = 0; i < 3; i++) {
             ContentValues contentValues = new ContentValues();
-            contentValues.put(DBsBook.COLUMN_NAME, "Head First Android Development");
-            contentValues.put(DBsBook.COLUMN_AUTHOR, "Dawn Griffi\nDavid Griffi");
-            contentValues.put(DBsBook.COLUMN_QTY, 4);
-            contentValues.put(DBsBook.COLUMN_PRICE, 100.0);
+            contentValues.put(DBs.BOOK_COLUMN_NAME, "Head First Android Development");
+            contentValues.put(DBs.BOOK_COLUMN_AUTHOR, "Dawn Griffi\nDavid Griffi");
+            contentValues.put(DBs.BOOK_COLUMN_QTY, 4);
+            contentValues.put(DBs.BOOK_COLUMN_PRICE, 100.0);
             try {
-                boolean success = db.insertOrThrow(DBsBook.TABLE_NAME, null, contentValues) != -1;
+                boolean success = db.insertOrThrow(DBs.BOOK_TABLE_NAME, null, contentValues) != -1;
                 Log.v("SQLHelper", "inserting values: " + (success? "success":"failed"));
             } catch (SQLException e) {
                 Log.v("SQLHelper", "inserting values: failed, throw: " + e.getMessage());

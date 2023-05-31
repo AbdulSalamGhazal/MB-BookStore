@@ -1,18 +1,19 @@
 package com.example.project_bookstore;
 
-public class bookModel {
+public class BookModel {
     int id,qty;
     String name,author;
     double price;
 
-    public bookModel(String name, String author, int qty, double price) {
+    public BookModel(String name, String author, int qty, double price) {
+        this.id =  (int) (Math.random() * 1000000000);
         this.qty = qty;
         this.name = name;
         this.author = author;
         this.price = price;
     }
 
-    public bookModel(int id, String name, String author,int qty,  double price) {
+    public BookModel(int id, String name, String author, int qty, double price) {
         this.id = id;
         this.qty = qty;
         this.name = name;

@@ -74,9 +74,9 @@ public class BookDetailActivity extends AppCompatActivity {
     private Cursor getCursor() {
         Intent intent = getIntent();
         int bookId = intent.getExtras().getInt(EXTRA_BOOK_ID);
-        SQLiteDatabase db = new DBsBook(this).getReadableDatabase();
-        Cursor cursor = db.query(DBsBook.TABLE_NAME,
-                new String[]{DBsBook.COLUMN_NAME, DBsBook.COLUMN_AUTHOR, DBsBook.COLUMN_PRICE},
+        SQLiteDatabase db = new DBs(this).getReadableDatabase();
+        Cursor cursor = db.query(DBs.BOOK_TABLE_NAME,
+                new String[]{DBs.BOOK_COLUMN_NAME, DBs.BOOK_COLUMN_AUTHOR, DBs.BOOK_COLUMN_PRICE},
                 "_id = ?",
                 new String[]{String.valueOf(bookId)},
                 null, null, null);
