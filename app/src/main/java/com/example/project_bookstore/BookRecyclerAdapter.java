@@ -11,12 +11,14 @@ import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapter.ViewHolder> {
-    private Cursor cursor;
+    private List<BookModel> books;
     private Listener listener;
 
     interface Listener {
-        void onClick(int _id);
+        void onClick(int book_id);
     }
 
     public void setListener(Listener listener) {
@@ -31,13 +33,13 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
         }
     }
 
-    public BookRecyclerAdapter(Cursor cursor) {
-        this.cursor = cursor;
+    public BookRecyclerAdapter(List<BookModel> books) {
+        this.books = books;
     }
 
     @Override
     public int getItemCount() {
-        return cursor.getCount();
+        return books.size();
     }
 
     @NonNull
@@ -51,12 +53,10 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         CardView cardView = holder.cardView;
-        cursor.moveToPosition(position);
+        BookModel book = books.get(position);
 
         //TODO: following values must be fetched from cursor
         int imageId = R.drawable.head_first_image;
-        String title = cursor.getString(1);
-        String author = cursor.getString(2);
 
         //set the image of the book
         ImageView bookImageView = cardView.findViewById(R.id.book_image);
@@ -65,16 +65,16 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
 
         //set the title of the book
         TextView titleView = cardView.findViewById(R.id.book_title);
-        titleView.setText(title);
+        titleView.setText(book.name);
 
         //set name of author
         TextView authorView = cardView.findViewById(R.id.book_author);
-        authorView.setText(author);
+        authorView.setText(book.author);
 
         //set onclick listener to the card
         cardView.setOnClickListener(view -> {
             if (listener != null) {
-                listener.onClick(cursor.getInt(0));
+                listener.onClick(book.id);
             }
         });
     }
