@@ -34,6 +34,8 @@ public class SignIn extends AppCompatActivity {
                 // if found fetch password and compare it, if not match "Email/Password incorrect"
                 if(Email.equals("admin") && Password.equals("admin")){
                     Toast.makeText(SignIn.this,"LOGIN SUCCESSFULLY",Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(SignIn.this, Profile.class);
+                    startActivity(i);
                 }else{
                     Toast.makeText(SignIn.this,"LOGIN FAILED!",Toast.LENGTH_SHORT).show();
                 }
