@@ -18,6 +18,7 @@ import com.google.android.material.button.MaterialButton;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 
 public class Register extends AppCompatActivity {
@@ -48,8 +49,17 @@ public class Register extends AppCompatActivity {
             else{
                 UserModel user = new UserModel(userName, email, password, phone, gender);
                 DBs helper = new DBs(Register.this);
-                helper.addUser(user);
-                Toast.makeText(Register.this,"SUCCESSFULLY!",Toast.LENGTH_LONG).show();
+                List<String> arr = helper.getAllEmails();
+                while (arr.equals(null))
+                if (email == arr.toString()){
+                    Toast.makeText(Register.this,"THIS EMAIL IS EXIST!",Toast.LENGTH_LONG).show();
+                }
+                else {
+                    helper.addUser(user);
+                    Toast.makeText(Register.this, "SUCCESSFULLY!", Toast.LENGTH_LONG).show();
+                    Intent i = new Intent(Register.this, SignIn.class);
+                    startActivity(i);
+                }
             }
         });
 
