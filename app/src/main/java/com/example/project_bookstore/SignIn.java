@@ -32,10 +32,10 @@ public class SignIn extends AppCompatActivity {
 
                 // search for matching email, if none found toast "Email/Password incorrect"
                 // if found fetch password and compare it, if not match "Email/Password incorrect"
-                if(Email.equals("admin") && Password.equals("admin")){
-                    Toast.makeText(SignIn.this,"LOGIN SUCCESSFULLY",Toast.LENGTH_SHORT).show();
+                if(Email.isEmpty() || Password.isEmpty()){
+                    Toast.makeText(SignIn.this,"PLEASE COMPLETE ALL FIELDS!",Toast.LENGTH_SHORT).show();
                 }else{
-                    Toast.makeText(SignIn.this,"LOGIN FAILED!",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(SignIn.this,"LOGIN SUCCESSFULLY",Toast.LENGTH_SHORT).show();
                 }
             }
         });
