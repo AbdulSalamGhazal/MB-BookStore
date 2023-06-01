@@ -26,50 +26,49 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        EditText name = (EditText)findViewById(R.id.name);
-        EditText email = (EditText)findViewById(R.id.email);
-        EditText password = (EditText)findViewById(R.id.newPassword);
-        EditText phone = (EditText) findViewById(R.id.PhoneNumber);
-        Button gender = (Button) findViewById(R.id.Gender);
+        EditText nameView = (EditText)findViewById(R.id.name);
+        EditText emailView = (EditText)findViewById(R.id.email);
+        EditText passwordView = (EditText)findViewById(R.id.newPassword);
+        EditText phoneView = (EditText) findViewById(R.id.PhoneNumber);
+        Button genderView = (Button) findViewById(R.id.Gender);
 
 
         //Register Button
         MaterialButton regButton = (MaterialButton) findViewById(R.id.RegisterButton);
-        regButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String userName = name.getText().toString();
-                String Email = email.getText().toString();
-                String Password = password.getText().toString();
-                String Phone = phone.getText().toString();
-                String Gender = gender.getText().toString();
+        regButton.setOnClickListener(v -> {
+            String userName = nameView.getText().toString();
+            String email = emailView.getText().toString();
+            String password = passwordView.getText().toString();
+            String phone = phoneView.getText().toString();
+            String gender = genderView.getText().toString();
 
-                if(userName.isEmpty() || Email.isEmpty() || Password.isEmpty() || Phone.isEmpty() || Gender.isEmpty()){
-                    Toast.makeText(Register.this,"PLEASE COMPLETE ALL FIELDS!",Toast.LENGTH_LONG).show();
-                }
-                else{
-                    Toast.makeText(Register.this,"SUCCESSFULLY!",Toast.LENGTH_LONG).show();
-
-                }
+            if(userName.isEmpty() || email.isEmpty() || password.isEmpty() || phone.isEmpty() || gender.isEmpty()){
+                Toast.makeText(Register.this,"PLEASE COMPLETE ALL FIELDS!",Toast.LENGTH_LONG).show();
+            }
+            else{
+                UserModel user = new UserModel(userName, email, password, phone, gender);
+                DBs helper = new DBs(Register.this);
+                helper.addUser(user);
+                Toast.makeText(Register.this,"SUCCESSFULLY!",Toast.LENGTH_LONG).show();
             }
         });
 
 
 
         //Popup Menu
-        gender.setOnClickListener(new View.OnClickListener() {
+        genderView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PopupMenu popup = new PopupMenu(Register.this,gender);
+                PopupMenu popup = new PopupMenu(Register.this,genderView);
                 popup.getMenuInflater().inflate(R.menu.pop,popup.getMenu());
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                     @Override
                     public boolean onMenuItemClick(MenuItem item) {
                         if(item.getItemId() == R.id.Male){
-                            gender.setText("Male");
+                            genderView.setText("Male");
                         }
                         if(item.getItemId() == R.id.Female){
-                            gender.setText("Female");
+                            genderView.setText("Female");
                         }
                         return true;
                     }

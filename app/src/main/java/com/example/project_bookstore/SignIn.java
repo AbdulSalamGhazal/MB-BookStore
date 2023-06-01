@@ -12,7 +12,7 @@ import android.widget.Toast;
 import com.google.android.material.button.MaterialButton;
 
 public class SignIn extends AppCompatActivity {
-
+    public static int userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,9 +33,10 @@ public class SignIn extends AppCompatActivity {
                 // search for matching email, if none found toast "Email/Password incorrect"
                 // if found fetch password and compare it, if not match "Email/Password incorrect"
                 if(Email.equals("admin") && Password.equals("admin")){
+                    //TODO: assign a value to user ID
                     Toast.makeText(SignIn.this,"LOGIN SUCCESSFULLY",Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(SignIn.this, Profile.class);
-                    startActivity(i);
+                    Intent intent = new Intent(SignIn.this, ShowBooksActivity.class);
+                    startActivity(intent);
                 }else{
                     Toast.makeText(SignIn.this,"LOGIN FAILED!",Toast.LENGTH_SHORT).show();
                 }
