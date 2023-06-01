@@ -29,6 +29,8 @@ public class DBs extends SQLiteOpenHelper {
     public static final String USER_COLUMN_PASSWORD = "password";
     public static final String USER_COLUMN_PHONE = "phone";
     public static final String USER_COLUMN_GENDER = "gender";
+    public static final String USER_COLUMN_ROLE = "role";
+
     public static final String USER_COLUMN_BOOKS = "books";
 
 
@@ -55,7 +57,8 @@ public class DBs extends SQLiteOpenHelper {
                 USER_COLUMN_PASSWORD + " TEXT NOT NULL, " +
                 USER_COLUMN_PHONE + " TEXT NOT NULL, " +
                 USER_COLUMN_GENDER + " TEXT NOT NULL, " +
-                USER_COLUMN_BOOKS + " TEXT  DEFAULT '' " +
+                 USER_COLUMN_ROLE + " TEXT NOT NULL, " +
+                 USER_COLUMN_BOOKS + " TEXT  DEFAULT '' " +
                 ");";
 
         db.execSQL(sql);
@@ -115,27 +118,29 @@ public class DBs extends SQLiteOpenHelper {
 
 
 
-    boolean addUser(UserModel userModel){
+    boolean addUser(UserModel user){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put(USER_COLUMN_ID, userModel.id);
-        cv.put(USER_COLUMN_NAME, userModel.name);
-        cv.put(USER_COLUMN_EMAIL, userModel.email);
-        cv.put(USER_COLUMN_PASSWORD, userModel.password);
-        cv.put(USER_COLUMN_PHONE, userModel.phone);
-        cv.put(USER_COLUMN_GENDER, userModel.gender);
-
+        cv.put(USER_COLUMN_ID, user.id);
+        cv.put(USER_COLUMN_NAME, user.name);
+        cv.put(USER_COLUMN_EMAIL, user.email);
+        cv.put(USER_COLUMN_PASSWORD, user.password);
+        cv.put(USER_COLUMN_PHONE, user.phone);
+        cv.put(USER_COLUMN_GENDER, user.gender);
+        cv.put(USER_COLUMN_ROLE, user.role);
         return sqLiteDatabase.insert(USER_TABLE_NAME, null, cv) != -1;
     }
     boolean updateUser(UserModel user){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
-        ContentValues data = new ContentValues();
-        data.put(USER_COLUMN_NAME, user.name);
-        data.put(USER_COLUMN_EMAIL, user.email);
-        data.put(USER_COLUMN_PASSWORD, user.password);
-        data.put(USER_COLUMN_PHONE, user.phone);
-        data.put(USER_COLUMN_GENDER, user.gender);
-        return sqLiteDatabase.update(USER_TABLE_NAME, data, USER_COLUMN_ID +" = ?",
+        ContentValues cv = new ContentValues();
+        cv.put(USER_COLUMN_NAME, user.name);
+        cv.put(USER_COLUMN_EMAIL, user.email);
+        cv.put(USER_COLUMN_PASSWORD, user.password);
+        cv.put(USER_COLUMN_PHONE, user.phone);
+        cv.put(USER_COLUMN_GENDER, user.gender);
+        cv.put(USER_COLUMN_ROLE, user.role);
+
+        return sqLiteDatabase.update(USER_TABLE_NAME, cv, USER_COLUMN_ID +" = ?",
                 new String[]{String.valueOf(user.id)}) > 0;
     }
     boolean deleteUser(int id){
@@ -155,9 +160,10 @@ public class DBs extends SQLiteOpenHelper {
                 String userPassword = cursor.getString(3);
                 String userPhone = cursor.getString(4);
                 String userGender = cursor.getString(5);
-                String userBooks = cursor.getString(6);
+                String userRole = cursor.getString(6);
+                String userBooks = cursor.getString(7);
 
-                list.add(new UserModel(userID, userName, userEmail, userPassword, userPhone, userGender, userBooks));
+                list.add(new UserModel(userID, userName, userEmail, userPassword, userPhone, userGender, userRole, userBooks));
             }while (cursor.moveToNext());
         }
         cursor.close();
@@ -240,7 +246,8 @@ public class DBs extends SQLiteOpenHelper {
     UserModel getUserInfoByEmail(String email){
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query(USER_TABLE_NAME,new String[]{USER_COLUMN_ID,USER_COLUMN_NAME,
-                USER_COLUMN_EMAIL,USER_COLUMN_PASSWORD,USER_COLUMN_PHONE,USER_COLUMN_GENDER, USER_COLUMN_BOOKS},
+                USER_COLUMN_EMAIL,USER_COLUMN_PASSWORD,USER_COLUMN_PHONE,USER_COLUMN_GENDER, USER_COLUMN_ROLE,
+                        USER_COLUMN_BOOKS},
                 USER_COLUMN_EMAIL + " = ?", new String[]{email},null,
                 null,null);
         if (cursor.moveToFirst()) {
@@ -250,9 +257,10 @@ public class DBs extends SQLiteOpenHelper {
             String userPassword = cursor.getString(3);
             String userPhone = cursor.getString(4);
             String userGender = cursor.getString(5);
-            String userBooks = cursor.getString(6);
+            String userRole = cursor.getString(6);
+            String userBooks = cursor.getString(7);
 
-            return new UserModel(userID, userName, userEmail, userPassword, userPhone, userGender, userBooks);
+            return new UserModel(userID, userName, userEmail, userPassword, userPhone, userGender, userRole, userBooks);
         }else {
             return null;
         }
