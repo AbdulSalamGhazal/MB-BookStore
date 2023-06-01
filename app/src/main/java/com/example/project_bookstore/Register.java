@@ -47,8 +47,8 @@ public class Register extends AppCompatActivity {
                 Toast.makeText(Register.this,"PLEASE COMPLETE ALL FIELDS!",Toast.LENGTH_LONG).show();
             }
             else{
+                UserModel user = new UserModel(userName, email, password, phone, gender);
                 DBs helper = new DBs(Register.this);
-                UserModel user = helper.getUserInfoByEmail(SignIn.userEmail);
                 List<String> allEmails = helper.getAllEmails();
                 for (String Email : allEmails){
                     if (Email.equals(email)){
