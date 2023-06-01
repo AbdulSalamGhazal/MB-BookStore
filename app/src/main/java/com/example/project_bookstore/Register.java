@@ -47,18 +47,19 @@ public class Register extends AppCompatActivity {
                 Toast.makeText(Register.this,"PLEASE COMPLETE ALL FIELDS!",Toast.LENGTH_LONG).show();
             }
             else{
-                UserModel user = new UserModel(userName, email, password, phone, gender);
                 DBs helper = new DBs(Register.this);
-                List<String> arr = helper.getAllEmails();
-                while (arr.equals(null))
-                if (email == arr.toString()){
-                    Toast.makeText(Register.this,"THIS EMAIL IS EXIST!",Toast.LENGTH_LONG).show();
-                }
-                else {
-                    helper.addUser(user);
-                    Toast.makeText(Register.this, "SUCCESSFULLY!", Toast.LENGTH_LONG).show();
-                    Intent i = new Intent(Register.this, SignIn.class);
-                    startActivity(i);
+                UserModel user = helper.getUserInfoByEmail(SignIn.userEmail);
+                List<String> allEmails = helper.getAllEmails();
+                for (String Email : allEmails){
+                    if (Email.equals(email)){
+                        Toast.makeText(Register.this,"THIS EMAIL IS EXIST!",Toast.LENGTH_LONG).show();
+                    }
+                    else {
+                        helper.addUser(user);
+                        Toast.makeText(Register.this, "SUCCESSFULLY!", Toast.LENGTH_LONG).show();
+                        Intent i = new Intent(Register.this, SignIn.class);
+                        startActivity(i);
+                    }
                 }
             }
         });
