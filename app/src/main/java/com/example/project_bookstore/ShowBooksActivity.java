@@ -23,7 +23,7 @@ public class ShowBooksActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        RecyclerView rv = (RecyclerView) findViewById(R.id.book_recycler);
+        RecyclerView rv = findViewById(R.id.book_recycler);
         Cursor cursor = getCursor();
         BookRecyclerAdapter adapter = new BookRecyclerAdapter(cursor);
         rv.setAdapter(adapter);
