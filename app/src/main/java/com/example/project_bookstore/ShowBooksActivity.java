@@ -42,9 +42,14 @@ public class ShowBooksActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent;
         switch (item.getItemId()){
             case R.id.action_cart:
-                Intent intent = new Intent(this, CartActivity.class);
+                intent = new Intent(this, CartActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_account:
+                intent = new Intent(this, ProfileUser.class);
                 startActivity(intent);
                 return true;
             default:
