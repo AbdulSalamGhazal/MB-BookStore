@@ -6,7 +6,6 @@ public class BookModel {
     double price;
 
     public BookModel(String name, String author, int qty, double price) {
-        this.id =  (int) (Math.random() * 1000000000);
         this.qty = qty;
         this.name = name;
         this.author = author;
