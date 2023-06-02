@@ -29,6 +29,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.BookViewHolder
         private TextView bookNameTextView;
         private TextView bookPriceTextView;
         private ImageButton removeButton;
+        private Context context;
 
         // Define a constructor to initialize the views
         public BookViewHolder(@NonNull View itemView) {
@@ -44,6 +45,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.BookViewHolder
     @Override
     public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_item, parent, false);
+        context = view.getContext();
         return new BookViewHolder(view);
     }
 
@@ -61,6 +63,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.BookViewHolder
         holder.removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //TODO: Remove the book from database
+
                 // Remove the book from the array list
                 books.remove(position);
 
