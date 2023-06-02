@@ -23,7 +23,10 @@ public class MainActivity extends AppCompatActivity {
         BookModel book2 = new BookModel("atomic habit","how to mantain you habits","david",100,9.99);
         UserModel user1 = new UserModel("ahmad","ahmad@gmail.com","passAhmad","9665913943","male");
         UserModel user2 = new UserModel("tala","tgirl@hotmail.com","qwerty","9615423434","female");
-
+        db.addUser(user2);
+        OrderModel order = new OrderModel(user2.id , 300);
+        db.make_order(order);
+        System.out.println(db.getAllOrders());
 
         // Sign in button
         Button signin = (Button) findViewById(R.id.signin);

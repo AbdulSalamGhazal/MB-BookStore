@@ -43,7 +43,6 @@ public class DBs extends SQLiteOpenHelper {
     public static final String ORDER_COLUMN_USER_ID = "user_id";
     public static final String ORDER_COLUMN_USER_NAME = "user_name";
     public static final String ORDER_COLUMN_TOTAL = "total";
-    public static final String ORDER_COLUMN_PAYMENT_METHOD = "payment";
     public static final String ORDER_COLUMN_STATUS = "status";
 
 
@@ -82,7 +81,6 @@ public class DBs extends SQLiteOpenHelper {
                 ORDER_COLUMN_USER_ID + " INTEGER NOT NULL, " +
                 ORDER_COLUMN_USER_NAME + " TEXT NOT NULL, " +
                 ORDER_COLUMN_TOTAL + " INTEGER NOT NULL, " +
-                ORDER_COLUMN_PAYMENT_METHOD + " TEXT NOT NULL, " +
                 ORDER_COLUMN_STATUS + " TEXT  DEFAULT 'Pending' " +
                 ")";
 
@@ -332,12 +330,22 @@ public class DBs extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         cv.put(ORDER_COLUMN_ID, order.id);
         cv.put(ORDER_COLUMN_USER_ID, order.userId);
-        cv.put(ORDER_COLUMN_USER_NAME, order.userName);
+        cv.put(ORDER_COLUMN_USER_NAME, getUserInfo(order.userId));
         cv.put(ORDER_COLUMN_TOTAL, order.total);
-        cv.put(ORDER_COLUMN_PAYMENT_METHOD, order.payment_method);
-        cv.put(ORDER_COLUMN_STATUS, order.status);
+        cv.put(ORDER_COLUMN_STATUS, "Pending");
 
         return sqLiteDatabase.insert(ORDER_TABLE_NAME, null, cv) != -1;
+    }
+    String getUserInfo(int userId){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(USER_TABLE_NAME,new String[]{USER_COLUMN_NAME},
+                USER_COLUMN_ID + " = ?", new String[]{String.valueOf(userId)},null,
+                null,null);
+        if (cursor.moveToFirst()) {
+            return cursor.getString(0);
+        }else {
+            return "Not Found";
+        }
     }
 
     List<OrderModel> getAllOrders(){
@@ -350,9 +358,8 @@ public class DBs extends SQLiteOpenHelper {
                 int userId = cursor.getInt(1);
                 String userName = cursor.getString(2);
                 double total = cursor.getDouble(3);
-                String payment = cursor.getString(4);
-                String status = cursor.getString(5);
-                list.add(new OrderModel(orderId,userId,userName,total,payment,status));
+                String status = cursor.getString(4);
+                list.add(new OrderModel(orderId,userId,userName,total,status));
             }while (cursor.moveToNext());
         }
         cursor.close();

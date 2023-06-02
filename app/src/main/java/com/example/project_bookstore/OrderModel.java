@@ -8,24 +8,20 @@ public class OrderModel {
     String userName;
 
     double total;
-    String payment_method, status;
+    String status;
 
-    public OrderModel(int id, int userId, String userName, double total, String payment_method, String status) {
+    public OrderModel(int id, int userId, String userName, double total, String status) {
         this.id = id;
         this.userId = userId;
         this.userName = userName;
         this.total = total;
-        this.payment_method = payment_method;
         this.status = status;
     }
 
-    public OrderModel(int userId, String userName, double total, String payment_method, String status) {
+    public OrderModel(int userId, double total) {
         this.id = (int) (Math.random() * 100000000);
         this.userId = userId;
-        this.userName = userName;
         this.total = total;
-        this.payment_method = payment_method;
-        this.status = status;
     }
 
     @Override
@@ -35,7 +31,6 @@ public class OrderModel {
                 ", userId=" + userId +
                 ", userName='" + userName + '\'' +
                 ", total=" + total +
-                ", payment_method='" + payment_method + '\'' +
                 ", status='" + status + '\'' +
                 '}';
     }
