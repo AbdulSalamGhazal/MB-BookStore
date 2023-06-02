@@ -62,7 +62,7 @@ public class ShowBooksActivity extends AppCompatActivity {
     private void addBooks() {
         for (int i = 0; i < 1; i++) {
             DBs helper = new DBs(this);
-            helper.addBook(new BookModel("COMPUTER NETWORKING A Top-Down Approach", "James F. Kurose & Keith W. Ross", 50, 100));
+            helper.addBook(new BookModel("COMPUTER NETWORKING A Top-Down Approach","desc" ,"James F. Kurose & Keith W. Ross", 50, 100));
         }
     }
 }

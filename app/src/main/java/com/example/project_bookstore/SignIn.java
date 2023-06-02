@@ -13,6 +13,7 @@ import com.google.android.material.button.MaterialButton;
 
 public class SignIn extends AppCompatActivity {
     public static int userId;
+    public static String userEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,26 +22,33 @@ public class SignIn extends AppCompatActivity {
 
 
         //Login Button
-        EditText email = (EditText) findViewById(R.id.email);
-        EditText password = (EditText) findViewById(R.id.password);
+        EditText emailView = (EditText) findViewById(R.id.email);
+        EditText passwordView = (EditText) findViewById(R.id.password);
         MaterialButton loginButton = (MaterialButton) findViewById(R.id.loginbutton);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Email = email.getText().toString();
-                String Password = password.getText().toString();
-
+                String email = emailView.getText().toString();
+                String password = passwordView.getText().toString();
                 // search for matching email, if none found toast "Email/Password incorrect"
                 // if found fetch password and compare it, if not match "Email/Password incorrect"
-                if(Email.equals("admin") && Password.equals("admin")){
-                    //TODO: assign a value to user ID
-                    Toast.makeText(SignIn.this,"LOGIN SUCCESSFULLY",Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(SignIn.this, ShowBooksActivity.class);
-                    startActivity(intent);
-                }else{
-                    Toast.makeText(SignIn.this,"LOGIN FAILED!",Toast.LENGTH_SHORT).show();
+                DBs helper = new DBs(SignIn.this);
+                UserModel user = helper.getUserInfoByEmail(email);
+                if(email.isEmpty() || password.isEmpty()){
+                    Toast.makeText(SignIn.this,"PLEASE COMPLETE ALL FIELDS!",Toast.LENGTH_LONG).show();
                 }
-            }
+                else {
+                    if (helper.getUserInfoByEmail(email) != null && password.equals(user.password)) {
+                        userId = user.id;
+                        userEmail = user.email;
+                        Toast.makeText(SignIn.this, "LOGIN SUCCESSFULLY", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(SignIn.this, ShowBooksActivity.class);
+                        startActivity(intent);
+                    }else {
+                        Toast.makeText(SignIn.this, "Email Or Password Is Wrong!", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
         });
 
 
