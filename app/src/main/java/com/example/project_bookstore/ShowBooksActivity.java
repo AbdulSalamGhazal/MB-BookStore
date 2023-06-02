@@ -16,11 +16,12 @@ public class ShowBooksActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_show_books);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-//        addBooks();
         RecyclerView rv = findViewById(R.id.book_recycler);
+
         List<BookModel> books = new DBs(this).getAllBooks();
         BookRecyclerAdapter adapter = new BookRecyclerAdapter(books);
         rv.setAdapter(adapter);
@@ -40,11 +41,17 @@ public class ShowBooksActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
+
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        Intent intent;
         switch (item.getItemId()){
             case R.id.action_cart:
-                Intent intent = new Intent(this, CartActivity.class);
+                intent = new Intent(this, CartActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_account:
+                intent = new Intent(this, Profile.class);
                 startActivity(intent);
                 return true;
             default:
