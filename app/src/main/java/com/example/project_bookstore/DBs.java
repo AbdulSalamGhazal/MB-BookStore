@@ -41,7 +41,7 @@ public class DBs extends SQLiteOpenHelper {
     public static final String ORDER_TABLE_NAME = "orders";
     public static final String ORDER_COLUMN_ID = "_id";
     public static final String ORDER_COLUMN_USER_ID = "user_id";
-    public static final String ORDER_COLUMN_BOOKS = "user_id";
+    public static final String ORDER_COLUMN_USER_NAME = "user_name";
     public static final String ORDER_COLUMN_TOTAL = "total";
     public static final String ORDER_COLUMN_PAYMENT_METHOD = "payment";
     public static final String ORDER_COLUMN_STATUS = "status";
@@ -77,16 +77,16 @@ public class DBs extends SQLiteOpenHelper {
 
         db.execSQL(sql);
 
-//        sql = "CREATE TABLE " + ORDER_TABLE_NAME + "(" +
-//                ORDER_COLUMN_ID + " INTEGER PRIMARY KEY , " +
-//                ORDER_COLUMN_USER_ID + " TEXT NOT NULL, " +
-//                ORDER_COLUMN_BOOKS + " TEXT NOT NULL, " +
-//                ORDER_COLUMN_TOTAL + " INTEGER, " +
-//                ORDER_COLUMN_PAYMENT_METHOD + " TEXT NOT NULL, " +
-//                ORDER_COLUMN_STATUS + " TEXT  DEFAULT 'Pending' " +
-//                ");";
-//
-//        db.execSQL(sql);
+        sql = "CREATE TABLE " + ORDER_TABLE_NAME + "(" +
+                ORDER_COLUMN_ID + " INTEGER PRIMARY KEY , " +
+                ORDER_COLUMN_USER_ID + " INTEGER NOT NULL, " +
+                ORDER_COLUMN_USER_NAME + " TEXT NOT NULL, " +
+                ORDER_COLUMN_TOTAL + " INTEGER NOT NULL, " +
+                ORDER_COLUMN_PAYMENT_METHOD + " TEXT NOT NULL, " +
+                ORDER_COLUMN_STATUS + " TEXT  DEFAULT 'Pending' " +
+                ")";
+
+        db.execSQL(sql);
     }
 
     // if the version every has changed. no need to code.
@@ -286,9 +286,6 @@ public class DBs extends SQLiteOpenHelper {
     }
 
 
-
-
-
     //  method to fetch all existing emails
     List<String> getAllEmails() {
         List<String> list = new ArrayList<>();
@@ -330,7 +327,38 @@ public class DBs extends SQLiteOpenHelper {
     // TODO handle img in book database
 
     // TODO make_order(user)
-        // handel the total price
+    boolean make_order(OrderModel order){
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(ORDER_COLUMN_ID, order.id);
+        cv.put(ORDER_COLUMN_USER_ID, order.userId);
+        cv.put(ORDER_COLUMN_USER_NAME, order.userName);
+        cv.put(ORDER_COLUMN_TOTAL, order.total);
+        cv.put(ORDER_COLUMN_PAYMENT_METHOD, order.payment_method);
+        cv.put(ORDER_COLUMN_STATUS, order.status);
+
+        return sqLiteDatabase.insert(ORDER_TABLE_NAME, null, cv) != -1;
+    }
+
+    List<OrderModel> getAllOrders(){
+        List<OrderModel> list = new ArrayList<>();
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM " + ORDER_TABLE_NAME, null);
+        if(cursor.moveToFirst()){
+            do {
+                int orderId = cursor.getInt(0);
+                int userId = cursor.getInt(1);
+                String userName = cursor.getString(2);
+                double total = cursor.getDouble(3);
+                String payment = cursor.getString(4);
+                String status = cursor.getString(5);
+                list.add(new OrderModel(orderId,userId,userName,total,payment,status));
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        sqLiteDatabase.close();
+        return list;
+    }
 
     // TODO fetch all orders for the admin view
 
