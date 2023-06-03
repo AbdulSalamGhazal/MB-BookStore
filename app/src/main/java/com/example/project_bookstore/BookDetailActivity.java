@@ -50,7 +50,7 @@ public class BookDetailActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Book Details");
 
         // Set the content of the views
-        bookImageView.setImageResource(R.drawable.head_first_image); // TODO: Replace with your own image resource
+        bookImageView.setImageResource(R.drawable.rules_for_life); // TODO: Replace with your own image resource
         bookTitleView.setText(book.name); // Replace with your own title
         bookAuthorView.setText(book.author); // Replace with your own author
 //        bookDescriptionView.setText(book.);

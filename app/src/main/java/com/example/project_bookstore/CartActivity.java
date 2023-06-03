@@ -42,7 +42,8 @@ public class CartActivity extends AppCompatActivity {
         purchaseButton = findViewById(R.id.purchaseButton);
 
         // Initialize the array list of books with some sample data
-        books = new DBs(this).getAllBooks();
+        DBs helper = new DBs(this);
+        books = helper.getUserBooks(SignIn.userId);
 
         // Initialize the total price to zero
         totalPrice = 0.0;
@@ -62,6 +63,9 @@ public class CartActivity extends AppCompatActivity {
         // Initialize the adapter and set it to the recycler view
         adapter = new CartAdapter(books, this);
         recyclerView.setAdapter(adapter);
+
+//        purchaseButton.setOnClickListener(v -> new DBs(CartActivity.this).
+//                make_order(new OrderModel(SignIn.userId, totalPrice)));
     }
 
     // A method to update the total price when a book is removed from the cart
