@@ -24,7 +24,7 @@ public class DBs extends SQLiteOpenHelper {
     public static final String BOOK_COLUMN_AUTHOR = "author";
     public static final String BOOK_COLUMN_QTY = "qty";
     public static final String BOOK_COLUMN_PRICE = "price";
-
+    public static final String BOOK_COLUMN_IMAGE = "image";
     // USER TABLE
     public static final String USER_TABLE_NAME = "users";
     public static final String USER_COLUMN_ID = "_id";
@@ -43,7 +43,6 @@ public class DBs extends SQLiteOpenHelper {
     public static final String ORDER_COLUMN_USER_ID = "user_id";
     public static final String ORDER_COLUMN_USER_NAME = "user_name";
     public static final String ORDER_COLUMN_TOTAL = "total";
-    public static final String ORDER_COLUMN_PAYMENT_METHOD = "payment";
     public static final String ORDER_COLUMN_STATUS = "status";
 
 
@@ -59,9 +58,11 @@ public class DBs extends SQLiteOpenHelper {
                 BOOK_COLUMN_NAME + " TEXT NOT NULL, " +
                 BOOK_COLUMN_DESC + " TEXT, " +
                 BOOK_COLUMN_AUTHOR + " TEXT NOT NULL, " +
-                BOOK_COLUMN_QTY + " INTEGER NOT NULL CHECK (qty >= 0), " +
-                BOOK_COLUMN_PRICE + " REAL NOT NULL CHECK (price >= 0) " +
-                    ");";
+                BOOK_COLUMN_IMAGE + " INTEGER NOT NULL , " +
+                BOOK_COLUMN_PRICE + " REAL NOT NULL CHECK (price >= 0)," +
+                BOOK_COLUMN_QTY + " INTEGER NOT NULL CHECK (qty >= 0) " +
+
+                ");";
 
         db.execSQL(sql);
          sql = "CREATE TABLE " + USER_TABLE_NAME + "(" +
@@ -82,7 +83,6 @@ public class DBs extends SQLiteOpenHelper {
                 ORDER_COLUMN_USER_ID + " INTEGER NOT NULL, " +
                 ORDER_COLUMN_USER_NAME + " TEXT NOT NULL, " +
                 ORDER_COLUMN_TOTAL + " INTEGER NOT NULL, " +
-                ORDER_COLUMN_PAYMENT_METHOD + " TEXT NOT NULL, " +
                 ORDER_COLUMN_STATUS + " TEXT  DEFAULT 'Pending' " +
                 ")";
 
@@ -101,8 +101,9 @@ public class DBs extends SQLiteOpenHelper {
         cv.put(BOOK_COLUMN_NAME, book.name);
         cv.put(BOOK_COLUMN_DESC, book.desc);
         cv.put(BOOK_COLUMN_AUTHOR, book.author);
-        cv.put(BOOK_COLUMN_QTY, book.qty);
+        cv.put(BOOK_COLUMN_IMAGE, book.image);
         cv.put(BOOK_COLUMN_PRICE, book.price);
+        cv.put(BOOK_COLUMN_QTY, book.qty);
 
         return sqLiteDatabase.insertOrThrow(BOOK_TABLE_NAME, null, cv) != -1;
 
@@ -117,12 +118,13 @@ public class DBs extends SQLiteOpenHelper {
              do {
                 int bookID = cursor.getInt(0);
                 String bookName = cursor.getString(1);
-                 String bookDesc = cursor.getString(2);
-                 String bookAuthor = cursor.getString(3);
-                int bookQty = cursor.getInt(4);
+                String bookDesc = cursor.getString(2);
+                String bookAuthor = cursor.getString(3);
+                int bookImage = cursor.getInt(4);
                 double bookPrice = cursor.getDouble(5);
+                int bookQty = cursor.getInt(6);
 
-                list.add(new BookModel(bookID, bookName, bookDesc, bookAuthor, bookQty, bookPrice));
+                list.add(new BookModel(bookID, bookName, bookDesc, bookAuthor, bookImage, bookPrice,bookQty));
              }while (cursor.moveToNext());
          }
          cursor.close();
@@ -135,8 +137,10 @@ public class DBs extends SQLiteOpenHelper {
         cv.put(BOOK_COLUMN_NAME, book.name);
         cv.put(BOOK_COLUMN_DESC, book.desc);
         cv.put(BOOK_COLUMN_AUTHOR, book.author);
-        cv.put(BOOK_COLUMN_QTY, book.qty);
+        cv.put(BOOK_COLUMN_IMAGE, book.image);
         cv.put(BOOK_COLUMN_PRICE, book.price);
+        cv.put(BOOK_COLUMN_QTY, book.qty);
+
         return sqLiteDatabase.update(BOOK_TABLE_NAME, cv, BOOK_COLUMN_ID +" = ?",
                  new String[]{String.valueOf(book.id)}) > 0;
     }
@@ -206,7 +210,6 @@ public class DBs extends SQLiteOpenHelper {
                 null,null);
          String ids = cursor.moveToFirst() ? cursor.getString(0):"";
 
-
         // add the new book
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         ContentValues cv = new ContentValues();
@@ -247,10 +250,10 @@ public class DBs extends SQLiteOpenHelper {
             String bookName = cursor.getString(1);
             String bookDesc = cursor.getString(2);
             String bookAuthor = cursor.getString(3);
-            int bookQty = cursor.getInt(4);
+            int bookImage = cursor.getInt(4);
             double bookPrice = cursor.getDouble(5);
-
-            return new BookModel(bookID, bookName, bookDesc, bookAuthor, bookQty, bookPrice);
+            int bookQty = cursor.getInt(6);
+            return new BookModel(bookID, bookName, bookDesc, bookAuthor, bookImage, bookPrice, bookQty);
         }
         return null;
     }
@@ -327,19 +330,29 @@ public class DBs extends SQLiteOpenHelper {
     // TODO handle img in book database
 
     // TODO make_order(user)
+
+    String getUserInfo(int userId){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(USER_TABLE_NAME,new String[]{USER_COLUMN_NAME},
+                USER_COLUMN_ID + " = ?", new String[]{String.valueOf(userId)},null,
+                null,null);
+        if (cursor.moveToFirst()) {
+            return cursor.getString(0);
+        }else {
+            return "Not Found";
+        }
+    }
+
     boolean make_order(OrderModel order){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(ORDER_COLUMN_ID, order.id);
         cv.put(ORDER_COLUMN_USER_ID, order.userId);
-        cv.put(ORDER_COLUMN_USER_NAME, order.userName);
+        cv.put(ORDER_COLUMN_USER_NAME, getUserInfo(order.userId));
         cv.put(ORDER_COLUMN_TOTAL, order.total);
-        cv.put(ORDER_COLUMN_PAYMENT_METHOD, order.payment_method);
-        cv.put(ORDER_COLUMN_STATUS, order.status);
-
+        cv.put(ORDER_COLUMN_STATUS, "Pending");
         return sqLiteDatabase.insert(ORDER_TABLE_NAME, null, cv) != -1;
     }
-
     List<OrderModel> getAllOrders(){
         List<OrderModel> list = new ArrayList<>();
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
@@ -350,16 +363,92 @@ public class DBs extends SQLiteOpenHelper {
                 int userId = cursor.getInt(1);
                 String userName = cursor.getString(2);
                 double total = cursor.getDouble(3);
-                String payment = cursor.getString(4);
-                String status = cursor.getString(5);
-                list.add(new OrderModel(orderId,userId,userName,total,payment,status));
+                String status = cursor.getString(4);
+                list.add(new OrderModel(orderId,userId,userName,total,status));
             }while (cursor.moveToNext());
         }
         cursor.close();
         sqLiteDatabase.close();
         return list;
     }
+    OrderModel getOrderById( int order_Id){
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.query(ORDER_TABLE_NAME,new String[]{ORDER_COLUMN_ID, ORDER_COLUMN_USER_ID,
+                ORDER_COLUMN_USER_NAME, ORDER_COLUMN_TOTAL, ORDER_COLUMN_STATUS},
+                ORDER_COLUMN_ID + " = ?", new String[]{String.valueOf(order_Id)},null,
+                null,null);
+        if (cursor.moveToFirst()) {
+            int orderId = cursor.getInt(0);
+            int userId = cursor.getInt(1);
+            String userName = cursor.getString(2);
+            double total = cursor.getDouble(3);
+            String status = cursor.getString(4);
 
-    // TODO fetch all orders for the admin view
+            return new OrderModel(orderId, userId, userName, total, status);
+        }else {
+            return null;
+        }
 
+    }
+
+    public void create_books(){
+        addBook(new BookModel(
+                "Atomic Habits",
+                "No matter your goals, Atomic Habits offers a proven framework for improving—every day. James Clear, one of the world's leading experts on habit formation, reveals practical strategies that will teach you exactly how to form good habits, break bad ones, and master the tiny behaviors that lead to remarkable results.",
+                "James Clear",
+                R.drawable.atomic_habits,
+                59,
+                40
+        ));
+        addBook(new BookModel(
+                "Factfulness",
+                "When asked simple questions about global trends—what percentage of the world’s population live in poverty; why the world’s population is increasing; how many girls finish school—we systematically get the answers wrong. So wrong that a chimpanzee choosing answers at random will consistently outguess teachers, journalists, Nobel laureates, and investment bankers.",
+                "Hans Rosling",
+                R.drawable.factfulness,
+                9.99,
+                10
+        ));
+        addBook(new BookModel(
+                "What If?",
+                "Randall Munroe left NASA in 2005 to start up his hugely popular site XKCD 'a web comic of romance, sarcasm, math and language' which offers a witty take on the world of science and geeks. It now has 600,000 to a million page hits daily. Every now and then, Munroe would get emails asking him to arbitrate a science debate. 'My friend and I were arguing about what would happen if a bullet got struck by lightning, and we agreed that you should resolve it . . . ' He liked these questions so much that he started up What If.",
+                "Randall Munroe",
+                R.drawable.whatif,
+                1,
+                0
+        ));
+        addBook(new BookModel(
+                "Outliers",
+                "In this stunning book, Malcolm Gladwell takes us on an intellectual journey through the world of \"outliers\"--the best and the brightest, the most famous and the most successful. He asks the question: what makes high-achievers different?",
+                "Malcolm Gladwell",
+                R.drawable.outliers,
+                15,
+                120
+        ));
+        addBook(new BookModel(
+                "Guns, Germs, and Steel",
+                "In this \"artful, informative, and delightful\" (William H. McNeill, New York Review of Books) book, Jared Diamond convincingly argues that geographical and environmental factors shaped the modern world. Societies that had a head start in food production advanced beyond the hunter-gatherer stage, and then developed writing, technology, government, and organized religion—as well as nasty germs and potent weapons of war—and adventured on sea and land to conquer and decimate preliterate cultures. A major advance in our understanding of human societies, Guns, Germs, and Steel chronicles the way that the modern world came to be and stunningly dismantles racially based theories of human history.",
+                "Jared Diamond",
+                R.drawable.gunsgermsandsteel,
+                19.99,
+                54
+        ));
+
+        addBook(new BookModel(
+                "Thinking, Fast and Slow",
+                "In the highly anticipated Thinking, Fast and Slow, Kahneman takes us on a groundbreaking tour of the mind and explains the two systems that drive the way we think. System 1 is fast, intuitive, and emotional; System 2 is slower, more deliberative, and more logical. Kahneman exposes the extraordinary capabilities—and also the faults and biases—of fast thinking, and reveals the pervasive influence of intuitive impressions on our thoughts and behavior. The impact of loss aversion and overconfidence on corporate strategies, the difficulties of predicting what will make us happy in the future, the challenges of properly framing risks at work and at home, the profound effect of cognitive biases on everything from playing the stock market to planning the next vacation—each of these can be understood only by knowing how the two systems work together to shape our judgments and decisions.",
+                "Daniel Kahneman",
+                R.drawable.thinkingfastandslow,
+                25,
+                20
+        ));
+        addBook(new BookModel(
+                "The Tipping Point",
+                "The tipping point is that magic moment when an idea, trend, or social behavior crosses a threshold, tips, and spreads like wildfire. Just as a single sick person can start an epidemic of the flu, so too can a small but precisely targeted push cause a fashion trend, the popularity of a new product, or a drop in the crime rate. This widely acclaimed bestseller, in which Malcolm Gladwell explores and brilliantly illuminates the tipping point phenomenon, is already changing the way people throughout the world think about selling products and disseminating ideas.",
+                "Malcolm Gladwell",
+                R.drawable.thetippingpoint,
+                22,
+                5
+        ));
+
+    }
 }
