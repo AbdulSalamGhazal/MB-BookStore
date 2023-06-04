@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">Project_BookStore</string>
+    <string name="app_name">BookStore</string>
     <string name="title_activity_main2">MainActivity2</string>
+
     <!-- Strings used for fragments for navigation -->
     <string name="first_fragment_label">First Fragment</string>
     <string name="second_fragment_label">Second Fragment</string>
@@ -46,4 +47,7 @@
     <string name="menu_main_cart">Cart</string>
     <string name="menu_main_account">Account</string>
     <string name="check_out_button">Check Out</string>
+    <string name="bookstore_app">BookStore App</string>
+    <string name="welcome_explore_your_favorite_books">Welcome Explore Your Favorite Books</string>
+    <string name="welcome_explore_your_favorite_books_here">Welcome! Explore Your Favorite Books Here</string>
 </resources>

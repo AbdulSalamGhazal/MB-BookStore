@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/cardview_dark_background"
     tools:context=".SignIn">
 
     <TextView
@@ -13,7 +12,6 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="LOGIN"
-        android:textColor="@color/white"
         android:textSize="35dp"
         android:layout_margin="50dp"
         android:textStyle="bold"
@@ -23,15 +21,12 @@
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#30ffffff"
         android:drawableLeft="@drawable/baseline_email_24"
         android:drawablePadding="20dp"
         android:layout_below="@id/signin"
         android:hint="Email"
         android:padding="15dp"
         android:inputType="textEmailAddress"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         />
@@ -44,15 +39,13 @@
         android:layout_marginLeft="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="20dp"
-        android:background="#30ffffff"
         android:drawableLeft="@drawable/baseline_lock_24"
         android:drawablePadding="20dp"
         android:hint="Password"
         android:inputType="textPassword"
         android:isScrollContainer="false"
         android:padding="15dp"
-        android:textColor="@color/white"
-        android:textColorHint="@color/white" />
+        />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/loginbutton"
@@ -65,7 +58,6 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
-        android:backgroundTint="@color/design_default_color_secondary"
         android:text="LOGIN" />
 
     <TextView
@@ -74,9 +66,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/loginbutton"
         android:layout_centerHorizontal="true"
-        android:background="#30ffffff"
         android:text="Don't Have An Account!"
-        android:textColor="@color/white"
         android:textSize="20dp"
         android:textStyle="bold" />
 </RelativeLayout>

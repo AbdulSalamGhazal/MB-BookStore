@@ -2,10 +2,16 @@
     <!-- Base application theme. -->
     <style name="Theme.Project_BookStore" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/half_dark</item>
-        <item name="colorPrimaryDark">@color/dark</item>
-        <item name="colorAccent">@color/sky_blue</item>
-<!--        &lt;!&ndash; Primary brand color. &ndash;&gt;-->
+        <item name="colorPrimary">#FFFFFF</item>
+        <item name="colorPrimaryDark">#161C1F</item>
+        <item name="colorAccent">#0000ADB5</item>
+        <item name="background">#B00020</item>
+        <item name="colorSurface">#B00020</item>
+        <item name="colorSecondary">#00B087</item>
+        <item name="colorError">#B00020</item>
+
+
+        <!--        &lt;!&ndash; Primary brand color. &ndash;&gt;-->
 <!--        <item name="colorPrimary">@color/purple_500</item>-->
 <!--        <item name="colorPrimaryVariant">@color/purple_700</item>-->
 <!--        <item name="colorOnPrimary">@color/white</item>-->

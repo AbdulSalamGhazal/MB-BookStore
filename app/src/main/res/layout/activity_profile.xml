@@ -3,38 +3,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/darker_gray"
     android:orientation="vertical"
-    android:background="@color/green"
     tools:context=".Profile">
 
-    <include layout="@layout/toolbar"
-        android:id="@+id/toolbar"/>
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="20dp"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="20dp">
+
         <com.mikhaellopez.circularimageview.CircularImageView
             android:layout_width="110dp"
             android:layout_height="110dp"
-            android:src="@drawable/profile"
-            />
+            android:src="@drawable/profile" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
             android:text="User Info"
             android:textSize="20dp"
-            android:layout_marginTop="30dp"
-            android:textStyle="bold"
-            />
+            android:textStyle="bold" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/black"
             android:layout_marginTop="10dp"
-            />
+            android:background="@color/black" />
 
 
     </LinearLayout>
@@ -42,9 +43,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:orientation="horizontal"
-        android:paddingBottom="10dp"
-        android:layout_marginTop="15dp">
+        android:paddingBottom="10dp">
 
         <ImageView
             android:layout_width="30dp"
@@ -54,11 +55,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:text="Full Name"
-            android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="18dp"
-            android:layout_marginLeft="5dp"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/NameBox"
@@ -67,26 +68,25 @@
             android:layout_marginLeft="55dp"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="18dp"
-            />
+            android:textSize="18dp" />
 
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/gray"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"/>
+        android:background="@color/gray" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="10dp"
-        android:paddingBottom="10dp"
-        >
+        android:orientation="horizontal"
+        android:paddingBottom="10dp">
 
         <ImageView
             android:layout_width="30dp"
@@ -96,11 +96,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:text="Email"
-            android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="18dp"
-            android:layout_marginLeft="5dp"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/EmailBox"
@@ -109,8 +109,7 @@
             android:layout_marginLeft="91dp"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="18dp"
-            />
+            android:textSize="18dp" />
 
 
     </LinearLayout>
@@ -118,17 +117,17 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/gray"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"/>
+        android:background="@color/gray" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:paddingBottom="10dp"
-        android:layout_marginTop="10dp">
+        android:paddingBottom="10dp">
 
         <ImageView
             android:layout_width="30dp"
@@ -138,11 +137,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:text="Phone Number"
-            android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="18dp"
-            android:layout_marginLeft="5dp"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/PhoneBox"
@@ -151,26 +150,25 @@
             android:layout_marginLeft="15dp"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="18dp"
-            />
+            android:textSize="18dp" />
 
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/gray"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"/>
+        android:background="@color/gray" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginTop="10dp"
-        android:paddingBottom="10dp"
-        >
+        android:orientation="horizontal"
+        android:paddingBottom="10dp">
 
         <ImageView
             android:layout_width="30dp"
@@ -180,11 +178,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:text="Gender"
-            android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="18dp"
-            android:layout_marginLeft="5dp"/>
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/GenderBox"
@@ -193,40 +191,37 @@
             android:layout_marginLeft="78dp"
             android:text=""
             android:textColor="@color/black"
-            android:textSize="18dp"
-            />
+            android:textSize="18dp" />
 
 
     </LinearLayout>
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/gray"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="10dp"
         android:layout_marginRight="15dp"
-        android:layout_marginLeft="15dp"/>
+        android:background="@color/gray" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
 
         <Button
+            android:id="@+id/logout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="LOGOUT"
-            android:id="@+id/logout"
-            android:drawableLeft="@drawable/baseline_logout_24"
-            android:textSize="22dp"
-            android:layout_marginRight="100dp"
             android:layout_marginLeft="100dp"
             android:layout_marginTop="40dp"
+            android:layout_marginRight="100dp"
+            android:drawableLeft="@drawable/baseline_logout_24"
             android:gravity="center"
-            />
+            android:text="LOGOUT"
+            android:textSize="22dp" />
     </LinearLayout>
-
-
 
 
 </LinearLayout>

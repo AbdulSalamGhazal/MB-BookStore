@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//
+
         DBs db = new DBs(this);
         db.create_books();
         System.out.println(db.getAllBooks());
@@ -32,23 +32,17 @@ public class MainActivity extends AppCompatActivity {
 
         // Sign in button
         Button signin = (Button) findViewById(R.id.signin);
-        signin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, SignIn.class);
-                startActivity(i);
-            }
+        signin.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, SignIn.class);
+            startActivity(i);
         });
 
 
         //Signup
         Button signup = (Button) findViewById(R.id.signup);
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, Register.class);
-                startActivity(i);
-            }
+        signup.setOnClickListener(v -> {
+            Intent i = new Intent(MainActivity.this, Register.class);
+            startActivity(i);
         });
     }
 }
