@@ -233,7 +233,10 @@ public class DBs extends SQLiteOpenHelper {
         if (cursor != null && cursor.moveToFirst()) {
             String ids = cursor.getString(0);
             for (String id : ids.split(",")) {
-                list.add(getBookById(id));
+                BookModel book = getBookById(id);
+                if (book != null) {
+                    list.add(book);
+                }
             }
         }
         return list;
@@ -241,7 +244,7 @@ public class DBs extends SQLiteOpenHelper {
     BookModel getBookById(String id){
         SQLiteDatabase sqLiteDatabase = getReadableDatabase();
         Cursor cursor = sqLiteDatabase.query(BOOK_TABLE_NAME,new String[]{BOOK_COLUMN_ID,BOOK_COLUMN_NAME
-                        ,BOOK_COLUMN_DESC,BOOK_COLUMN_AUTHOR,BOOK_COLUMN_QTY,BOOK_COLUMN_PRICE},
+                        ,BOOK_COLUMN_DESC,BOOK_COLUMN_AUTHOR,BOOK_COLUMN_IMAGE,BOOK_COLUMN_PRICE,BOOK_COLUMN_QTY},
                 BOOK_COLUMN_ID + " = ?", new String[]{id},null,
                 null,null);
 
@@ -279,7 +282,7 @@ public class DBs extends SQLiteOpenHelper {
             }
         }
     }
-    private void deleteAllBooksFromUser(int userId){
+    public void deleteAllBooksFromUser(int userId){
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(USER_COLUMN_BOOKS, "" );

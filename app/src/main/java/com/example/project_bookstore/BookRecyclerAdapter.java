@@ -55,12 +55,9 @@ public class BookRecyclerAdapter extends RecyclerView.Adapter<BookRecyclerAdapte
         CardView cardView = holder.cardView;
         BookModel book = books.get(position);
 
-        //TODO: following values must be fetched from cursor
-        int imageId = R.drawable.head_first_image;
-
         //set the image of the book
         ImageView bookImageView = cardView.findViewById(R.id.book_image);
-        Drawable drawable = ContextCompat.getDrawable(cardView.getContext(), imageId);
+        Drawable drawable = ContextCompat.getDrawable(cardView.getContext(), book.image);
         bookImageView.setImageDrawable(drawable);
 
         //set the title of the book

@@ -29,7 +29,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.BookViewHolder
         // Declare the views for the book item layout
         private TextView bookNameTextView;
         private TextView bookPriceTextView;
-        private ImageButton removeButton;
+        protected ImageButton removeButton;
         private Context context;
 
         // Define a constructor to initialize the views
@@ -61,20 +61,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.BookViewHolder
         holder.bookPriceTextView.setText(String.format("$%.2f", currentBook.price));
 
         // Set a click listener to the remove button
-        holder.removeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //remove book from database
-                new DBs(context).deleteBookFromUser(SignIn.userId, currentBook.id);
-                // Remove the book from the array list
-                books.remove(position);
+        holder.removeButton.setOnClickListener(v -> {
+            //remove book from database
+            new DBs(context).deleteBookFromUser(SignIn.userId, currentBook.id);
+            // Remove the book from the array list
+            books.remove(position);
 
-                // Notify the adapter that the data set has changed
-                notifyDataSetChanged();
+            // Notify the adapter that the data set has changed
+            notifyDataSetChanged();
 
-                // Update the total price in the main activity
-                ((CartActivity) context).updateTotal(currentBook.price);
-            }
+            // Update the total price in the main activity
+            ((CartActivity) context).updateTotal(currentBook.price);
         });
     }
 

@@ -125,23 +125,25 @@
         android:layout_marginTop="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:backgroundTint="@color/design_default_color_secondary"
         android:text="REGISTER" />
 
     <TextView
+        android:id="@+id/isReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/isReg"
         android:layout_below="@id/RegisterButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="#30ffffff"
         android:text="Already Have An Account?"
         android:textColor="@color/white"
-        android:layout_centerHorizontal="true"
-        android:layout_margin="20dp"
         android:textSize="20dp"
-        android:textStyle="bold"
-        android:background="#30ffffff"
-        />
+        android:textStyle="bold" />
 
 
 </RelativeLayout>
