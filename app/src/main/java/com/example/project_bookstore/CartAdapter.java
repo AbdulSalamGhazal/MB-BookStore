@@ -1,5 +1,6 @@
 package com.example.project_bookstore;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.BookViewHolder
         private TextView bookNameTextView;
         private TextView bookPriceTextView;
         private ImageButton removeButton;
+        private Context context;
 
         // Define a constructor to initialize the views
         public BookViewHolder(@NonNull View itemView) {
@@ -44,12 +46,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.BookViewHolder
     @Override
     public BookViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_item, parent, false);
+        context = view.getContext();
         return new BookViewHolder(view);
     }
 
     // Override the onBindViewHolder method to set the data to the views and handle the click events
     @Override
-    public void onBindViewHolder(@NonNull BookViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull BookViewHolder holder, @SuppressLint("RecyclerView") int position) {
         // Get the current book from the array list
         BookModel currentBook = books.get(position);
 
@@ -61,6 +64,8 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.BookViewHolder
         holder.removeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //remove book from database
+                new DBs(context).deleteBookFromUser(SignIn.userId, currentBook.id);
                 // Remove the book from the array list
                 books.remove(position);
 

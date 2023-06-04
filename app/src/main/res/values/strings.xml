@@ -45,4 +45,5 @@
     </string>
     <string name="menu_main_cart">Cart</string>
     <string name="menu_main_account">Account</string>
+    <string name="check_out_button">Check Out</string>
 </resources>
