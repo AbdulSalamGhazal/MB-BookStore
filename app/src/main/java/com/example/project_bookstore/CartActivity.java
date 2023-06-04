@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -64,8 +65,17 @@ public class CartActivity extends AppCompatActivity {
         adapter = new CartAdapter(books, this);
         recyclerView.setAdapter(adapter);
 
-//        purchaseButton.setOnClickListener(v -> new DBs(CartActivity.this).
-//                make_order(new OrderModel(SignIn.userId, totalPrice)));
+        purchaseButton.setOnClickListener(v -> {
+            if (books.isEmpty()) {
+                Toast.makeText(CartActivity.this,"Cart is Empty",Toast.LENGTH_SHORT).show();
+            }
+            else {
+                helper.make_order(new OrderModel(SignIn.userId, totalPrice));
+                helper.deleteAllBooksFromUser(SignIn.userId);
+                books.clear();
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     // A method to update the total price when a book is removed from the cart

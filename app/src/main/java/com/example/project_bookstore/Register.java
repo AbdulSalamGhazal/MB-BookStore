@@ -27,21 +27,22 @@ public class Register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        EditText nameView = findViewById(R.id.name);
-        EditText emailView = findViewById(R.id.email);
-        EditText passwordView = findViewById(R.id.newPassword);
-        EditText phoneView = findViewById(R.id.PhoneNumber);
-        Button genderView = findViewById(R.id.Gender);
+        EditText nameView = (EditText)findViewById(R.id.name);
+        EditText emailView = (EditText)findViewById(R.id.email);
+        EditText passwordView = (EditText)findViewById(R.id.newPassword);
+        EditText phoneView = (EditText) findViewById(R.id.PhoneNumber);
+        Button genderView = (Button) findViewById(R.id.Gender);
 
 
         //Register Button
-        MaterialButton regButton = findViewById(R.id.RegisterButton);
+        MaterialButton regButton = (MaterialButton) findViewById(R.id.RegisterButton);
         regButton.setOnClickListener(v -> {
             String userName = nameView.getText().toString();
             String email = emailView.getText().toString();
             String password = passwordView.getText().toString();
             String phone = phoneView.getText().toString();
             String gender = genderView.getText().toString();
+
             if(userName.isEmpty() || email.isEmpty() || password.isEmpty() || phone.isEmpty() || gender.isEmpty()){
                 Toast.makeText(Register.this,"PLEASE COMPLETE ALL FIELDS!",Toast.LENGTH_LONG).show();
             }
@@ -66,24 +67,30 @@ public class Register extends AppCompatActivity {
 
 
         //Popup Menu
-        genderView.setOnClickListener(v -> {
-            PopupMenu popup = new PopupMenu(Register.this,genderView);
-            popup.getMenuInflater().inflate(R.menu.pop,popup.getMenu());
-            popup.setOnMenuItemClickListener(item -> {
-                if(item.getItemId() == R.id.Male){
-                    genderView.setText("Male");
-                }
-                if(item.getItemId() == R.id.Female){
-                    genderView.setText("Female");
-                }
-                return true;
-            });
-            popup.show();
-          });
+        genderView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                PopupMenu popup = new PopupMenu(Register.this,genderView);
+                popup.getMenuInflater().inflate(R.menu.pop,popup.getMenu());
+                popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        if(item.getItemId() == R.id.Male){
+                            genderView.setText("Male");
+                        }
+                        if(item.getItemId() == R.id.Female){
+                            genderView.setText("Female");
+                        }
+                        return true;
+                    }
+                });
+                popup.show();
+              }
+        });
 
 
         //isNotReg TextView
-        TextView isReg = findViewById(R.id.isReg);
+        TextView isReg = (TextView)findViewById(R.id.isReg);
         isReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
